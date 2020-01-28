@@ -3,9 +3,7 @@
   id="network_ipv6_default_gateway" version="1">
     <metadata>
       <title>Manually Assign IPv6 Router Address</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Define default gateways for IPv6 traffic</description>
     </metadata>
     <criteria operator="OR">

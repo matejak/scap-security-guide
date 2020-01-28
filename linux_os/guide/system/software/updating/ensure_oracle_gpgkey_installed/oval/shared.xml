@@ -2,9 +2,7 @@
   <definition class="compliance" id="ensure_oracle_gpgkey_installed" version="1">
     <metadata>
       <title>Oracle Linux gpg-pubkey Package Installed</title>
-      <affected family="unix">
-        <platform>multi_platform_ol</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The Oracle Linux key packages are required to be installed.</description>
     </metadata>
     <criteria comment="Vendor GPG keys" operator="OR">

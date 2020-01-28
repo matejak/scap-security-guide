@@ -2,12 +2,7 @@
   <definition class="compliance" id="dconf_gnome_screensaver_idle_activation_enabled" version="1">
     <metadata>
       <title>Enable GNOME3 Screensaver Idle Activation</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_ol</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Idle activation of the screen saver should be enabled.</description>
     </metadata>
     <criteria operator="OR">

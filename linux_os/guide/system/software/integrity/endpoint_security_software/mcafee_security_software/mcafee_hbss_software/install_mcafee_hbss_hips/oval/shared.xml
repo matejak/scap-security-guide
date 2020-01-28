@@ -3,9 +3,7 @@
   version="1">
     <metadata>
       <title>Install the Host Intrusion Prevention System (HIPS) Module</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Install the McAfee Host Intrusion Prevention System (HIPS) Module if it is
       absolutely necessary. If SELinux is enabled, do not install or enable this module.</description>
     </metadata>

@@ -2,9 +2,7 @@
   <definition class="compliance" id="umask_for_daemons" version="2">
     <metadata>
       <title>Set Daemon umask</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The daemon umask should be set as appropriate</description>
     </metadata>
     <criteria operator="AND">

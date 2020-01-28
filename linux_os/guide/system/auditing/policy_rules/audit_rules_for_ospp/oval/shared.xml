@@ -34,10 +34,7 @@
   <definition class="compliance" id="audit_rules_for_ospp" version="1">
     <metadata>
       <title>Check audit rules for OSPP</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Compare configure audit rules againd the recommended pre-configured files</description>
     </metadata>
 

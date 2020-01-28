@@ -2,13 +2,7 @@
   <definition class="compliance" id="accounts_password_pam_unix_remember" version="2">
     <metadata>
       <title>Limit Password Reuse</title>
-      <affected family="unix">
-        <platform>multi_platform_wrlinux</platform>
-        <platform>multi_platform_rhel</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_rhv</platform>
-        <platform>multi_platform_ol</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The passwords to remember should be set correctly.</description>
     </metadata>
     <criteria comment="remember parameter of pam_unix.so or pam_pwhistory.so is set correctly" operator="OR">

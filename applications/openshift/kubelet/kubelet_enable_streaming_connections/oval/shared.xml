@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_enable_streaming_connections" version="1">
     <metadata>
       <title>Configure the kubelet to Prevent Streaming Timeouts</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Timouts for streaming connections should not be disabled as they help to prevent
       denial-of-service attacks.</description>
     </metadata>

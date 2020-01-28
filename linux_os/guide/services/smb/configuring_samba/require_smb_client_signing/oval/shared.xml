@@ -2,9 +2,7 @@
   <definition class="compliance" id="require_smb_client_signing" version="1">
     <metadata>
       <title>Require Client SMB Packet Signing in smb.conf</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Require samba clients which use smb.conf, such as smbclient,
       to use packet signing. A Samba client should only communicate with
       servers who can support SMB packet signing.</description>

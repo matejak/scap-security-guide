@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_tls_cipher_suites" version="1">
     <metadata>
       <title>Use Strong Cryptographic Ciphers on the API Server</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Configure cipherSuites to ensure that the API Server is configured to only use strong
       cryptographic ciphers.</description>
     </metadata>

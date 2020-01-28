@@ -2,9 +2,7 @@
   <definition class="compliance" id="keystone_hash_algorithm" version="1">
     <metadata>
       <title>Is hash_algorithm parameter set to SHA256?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is hash_algorithm parameter set to SHA256?</description>
     </metadata>
     <criteria comment="Is hash_algorithm parameter set to SHA256?" operator="AND">

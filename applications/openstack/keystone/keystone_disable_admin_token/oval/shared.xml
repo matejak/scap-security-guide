@@ -2,9 +2,7 @@
   <definition class="compliance" id="keystone_admin_token" version="1">
     <metadata>
       <title>Is admin_token parameter set to disabled?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is admin_token parameter set to disabled?</description>
     </metadata>
     <criteria comment="Is admin_token parameter set to disabled?" operator="AND">

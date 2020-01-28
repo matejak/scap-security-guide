@@ -2,9 +2,7 @@
   <definition class="compliance" id="container_cinder_glance_api_insecure" version="1">
     <metadata>
       <title>Is glance_api_insecure parameter set to False?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is glance_api_insecure parameter set to False?</description>
     </metadata>
     <criteria comment="Is glance_api_insecure parameter set to False?" operator="AND">

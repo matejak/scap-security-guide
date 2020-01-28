@@ -3,9 +3,7 @@
     <metadata>
       <title>Write permissions are disabled for group and other in all
       directories in Root's Path</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check each directory in root's path and make use it does
       not grant write permission to group and other</description>
     </metadata>

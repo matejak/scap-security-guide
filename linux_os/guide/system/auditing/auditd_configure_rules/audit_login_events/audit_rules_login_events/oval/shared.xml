@@ -2,12 +2,7 @@
   <definition class="compliance" id="audit_rules_login_events" version="2">
     <metadata>
       <title>Record Attempts to Alter Login and Logout Events</title>
-      <affected family="unix">
-        <platform>Red Hat Virtualization 4</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_ol</platform>
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Audit rules should be configured to log successful and unsuccessful login and logout events.</description>
     </metadata>
     <criteria operator="AND">

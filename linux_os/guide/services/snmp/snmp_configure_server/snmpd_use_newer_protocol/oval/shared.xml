@@ -2,9 +2,7 @@
   <definition class="compliance" id="snmpd_use_newer_protocol" version="2">
     <metadata>
       <title>SNMP use newer protocols</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>SNMP version 1 and 2c must not be enabled.</description>
     </metadata>
     <criteria operator="OR">

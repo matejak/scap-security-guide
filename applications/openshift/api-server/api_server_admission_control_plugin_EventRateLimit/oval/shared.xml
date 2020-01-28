@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_EventRateLimit" version="1">
     <metadata>
       <title>Enable the EventRateLimit Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable EventRateLimit to limit the rate at which the API Server accepts requests.</description>
     </metadata>
     <criteria operator="AND">

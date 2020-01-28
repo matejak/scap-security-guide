@@ -2,11 +2,7 @@
   <definition class="compliance" id="rsyslog_remote_tls_cacert" version="1">
     <metadata>
       <title>Check that CA certificate is configured for rsyslog remote logging</title>
-      <affected family="unix">
-        <platform>multi_platform_fedora</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>Oracle Linux 8</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check that the CA certificate path is set</description>
     </metadata>
     <criteria comment="Check that CA certificate is configured for rsyslog remote logging" operator="AND">

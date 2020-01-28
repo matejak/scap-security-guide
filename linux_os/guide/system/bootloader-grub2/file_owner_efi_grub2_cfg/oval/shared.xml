@@ -2,9 +2,7 @@
   <definition class="compliance" id="file_owner_efi_grub2_cfg" version="1">
     <metadata>
       <title>Verify the UEFI Boot Loader grub.cfg Owner</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Verify that UEFI Boot Loader grub.cfg is owned by uid 0.</description>
     </metadata>
     <criteria operator="OR">

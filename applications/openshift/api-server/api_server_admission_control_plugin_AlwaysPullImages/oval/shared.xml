@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_AlwaysPullImages" version="1">
     <metadata>
       <title>Enable the AlwaysPullImages Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure credentials are required to pull images.</description>
     </metadata>
     <criteria operator="AND">

@@ -2,9 +2,7 @@
   <definition class="compliance" id="accounts_minimum_age_login_defs" version="3">
     <metadata>
       <title>Set Password Expiration Parameters</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The minimum password age policy should be set appropriately.</description>
     </metadata>
     <criteria comment="The value of PASS_MIN_DAYS should be set appropriately in /etc/login.defs">

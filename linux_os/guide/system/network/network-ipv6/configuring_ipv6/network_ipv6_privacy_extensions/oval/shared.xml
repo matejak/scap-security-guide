@@ -3,11 +3,7 @@
   id="network_ipv6_privacy_extensions" version="1">
     <metadata>
       <title>Enable Privacy Extensions for IPv6</title>
-      <affected family="unix">
-        <platform>Red Hat Virtualization 4</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable privacy extensions for IPv6</description>
     </metadata>
     <criteria operator="OR">

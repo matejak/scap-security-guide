@@ -3,9 +3,7 @@
   version="1">
     <metadata>
       <title>Install the Asset Configuration Compliance Module (ACCM)</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Install the Asset Configuration Compliance Module (ACCM).</description>
     </metadata>
     <criteria>

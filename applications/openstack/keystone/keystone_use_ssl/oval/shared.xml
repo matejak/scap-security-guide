@@ -2,9 +2,7 @@
   <definition class="compliance" id="keystone_ssl_enable" version="1">
     <metadata>
       <title>Is enable parameter in the [ssl] section set to True?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is enable parameter in the [ssl] section set to True?</description>
     </metadata>
     <criteria comment="Is enable parameter in [ssl] section set to True?" operator="AND">

@@ -2,9 +2,7 @@
   <definition class="compliance" id="apt_sources_list_official" version="1">
     <metadata>
       <title>Only official, up-to-date distribution repositories should be used</title>
-      <affected family="unix">
-        <platform>multi_platform_debian</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Official distribution repositories contain up-to-date distribution security and functional patches.</description>
     </metadata>
     <criteria comment="Match sources.list distribution repositories usage" operator="AND">      

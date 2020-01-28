@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_AlwaysAdmit" version="1">
     <metadata>
       <title>Disable the AlwaysAdmit Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>To ensure OpenShift only responses to requests explicitly allowed by the
     admissions control plugin, remove any instance of AlwaysAdmit for the admission control plugin.</description>
     </metadata>

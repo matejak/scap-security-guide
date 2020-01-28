@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_insecure_allow_any_token" version="1">
     <metadata>
       <title>Disable Insecure Tokens</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>insecure-allow-any-token should not be configured on the master node.</description>
     </metadata>
     <criteria operator="AND">

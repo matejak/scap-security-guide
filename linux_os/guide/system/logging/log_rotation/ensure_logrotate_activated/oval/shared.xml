@@ -2,9 +2,7 @@
   <definition class="compliance" id="ensure_logrotate_activated" version="1">
     <metadata>
       <title>Ensure the logrotate utility performs the automatic rotation of log files on daily basis</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>
       The frequency of automatic log files rotation performed by the logrotate utility should be configured to run daily
       </description>

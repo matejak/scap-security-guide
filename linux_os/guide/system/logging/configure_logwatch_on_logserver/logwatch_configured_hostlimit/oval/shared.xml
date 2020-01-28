@@ -2,9 +2,7 @@
   <definition class="compliance" id="logwatch_configured_hostlimit" version="1">
     <metadata>
       <title>Ensure Logwatch HostLimit Configured</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Test if HostLimit line in logwatch.conf is set appropriately.</description>
     </metadata>
     <criteria operator="AND">

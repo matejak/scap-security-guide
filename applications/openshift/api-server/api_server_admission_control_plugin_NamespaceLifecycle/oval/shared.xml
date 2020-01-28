@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_NamespaceLifecycle" version="1">
     <metadata>
       <title>Enable the NamespaceLifecyle Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Setting admission control policy to NamespaceLifecycle ensures that
     objects cannot be created in non-existent namespaces.</description>
     </metadata>

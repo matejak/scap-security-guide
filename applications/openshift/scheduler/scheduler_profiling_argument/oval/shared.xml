@@ -2,9 +2,7 @@
   <definition class="compliance" id="scheduler_profiling_argument" version="1">
     <metadata>
       <title>Disable Scheduler Profiling</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Profiling should be disabled on the Scheduler.</description>
     </metadata>
     <criteria operator="AND">

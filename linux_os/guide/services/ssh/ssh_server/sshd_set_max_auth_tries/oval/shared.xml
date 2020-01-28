@@ -2,9 +2,7 @@
   <definition class="compliance" id="sshd_set_max_auth_tries" version="1">
     <metadata>
       <title>Set OpenSSH authentication attempt limit (MaxAuthTries)</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The SSH MaxAuthTries should be set to an
       appropriate value.</description>
     </metadata>

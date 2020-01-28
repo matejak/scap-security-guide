@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_disable_hostname_override" version="1">
     <metadata>
       <title>Disable Hostname Override on the kubelet</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The hostname should not be overrided in the node configuration file.</description>
     </metadata>
     <criteria operator="AND">

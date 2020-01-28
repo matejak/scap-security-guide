@@ -2,9 +2,7 @@
   <definition class="compliance" id="cups_disable_printserver" version="1">
     <metadata>
       <title>Disable Printer Server if Possible</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>By default, locally configured printers will not be shared
       over the network, but if this functionality has somehow been enabled,
       these recommendations will disable it again. Be sure to disable outgoing

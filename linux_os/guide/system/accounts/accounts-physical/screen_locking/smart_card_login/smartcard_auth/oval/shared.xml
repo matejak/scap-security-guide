@@ -2,11 +2,7 @@
   <definition class="compliance" id="smartcard_auth" version="3">
     <metadata>
       <title>Enable Smart Card Login</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 6</platform>
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Oracle Linux 7</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable Smart Card logins</description>
     </metadata>
     <criteria comment="smart card authentication is configured" operator="AND">

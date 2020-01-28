@@ -2,11 +2,7 @@
   <definition class="compliance" id="no_tmux_in_shells" version="1">
     <metadata>
       <title>Check that tmux is not listed in /etc/shells</title>
-      <affected family="unix">
-        <platform>multi_platform_fedora</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>Oracle Linux 8</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check that tmux is not listed in /etc/shells</description>
     </metadata>
     <criteria comment="Check that tmux is not listed in /etc/shells" operator="AND">

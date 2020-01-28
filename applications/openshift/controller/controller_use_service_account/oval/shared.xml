@@ -2,9 +2,7 @@
   <definition class="compliance" id="controller_use_service_account" version="1">
     <metadata>
       <title>Ensure that use-service-account-credentials is true</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure use-service-account-credentials is true.</description>
     </metadata>
     <criteria operator="AND">

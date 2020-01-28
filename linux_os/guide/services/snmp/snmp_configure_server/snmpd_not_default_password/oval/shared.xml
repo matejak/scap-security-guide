@@ -2,9 +2,7 @@
   <definition class="compliance" id="snmpd_not_default_password" version="2">
     <metadata>
       <title>SNMP default communities disabled</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>SNMP default communities must be removed.</description>
     </metadata>
     <criteria operator="OR">

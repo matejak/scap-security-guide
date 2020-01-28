@@ -2,11 +2,7 @@
   <definition class="compliance" id="dconf_gnome_disable_power_settings" version="1">
     <metadata>
       <title>Disable Power Settings in GNOME3</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>multi_platform_fedora</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Disable GNOME3 power settings.</description>
     </metadata>
     <criteria operator="OR">

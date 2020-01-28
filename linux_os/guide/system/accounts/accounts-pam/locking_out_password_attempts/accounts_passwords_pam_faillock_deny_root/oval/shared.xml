@@ -2,14 +2,7 @@
   <definition class="compliance" id="accounts_passwords_pam_faillock_deny_root" version="4">
     <metadata>
       <title>Lock out the root account after failed login attempts</title>
-      <affected family="unix">
-        <platform>multi_platform_wrlinux</platform>
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_rhv</platform>
-        <platform>multi_platform_ol</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The root account should be configured to deny access after the number of defined
       failed attempts has been reached.</description>
     </metadata>

@@ -2,11 +2,7 @@
   <definition class="compliance" id="configure_tmux_lock_command" version="1">
     <metadata>
       <title>Configure the tmux Lock Command</title>
-      <affected family="unix">
-        <platform>multi_platform_fedora</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>Oracle Linux 8</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check if the vlock command is configured to be used as a locking mechanism in tmux.</description>
     </metadata>
     <criteria comment="Configure the tmux Lock Command" operator="AND">

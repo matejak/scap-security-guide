@@ -2,11 +2,7 @@
   <definition class="compliance" id="configure_bashrc_exec_tmux" version="1">
     <metadata>
       <title>Check exec tmux configured at the end of bashrc</title>
-      <affected family="unix">
-        <platform>multi_platform_fedora</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>Oracle Linux 8</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check if tmux is configured to exec at the end of bashrc.</description>
     </metadata>
     <criteria comment="Check exec tmux configured at the end of bashrc" operator="AND">

@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_ServiceAccount" version="1">
     <metadata>
       <title>Enable the ServiceAccount Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable ServiceAccount to ensure objects must be created and granted
       before pod creation is allowed.</description>
     </metadata>

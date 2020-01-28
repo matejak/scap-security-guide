@@ -2,9 +2,7 @@
   <definition class="compliance" id="controller_disable_profiling" version="1">
     <metadata>
       <title>Ensure OPENSHIFT_PROFILE is not set to web</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure OPENSHIFT_PROFILE is not set to web.</description>
     </metadata>
     <criteria operator="AND">

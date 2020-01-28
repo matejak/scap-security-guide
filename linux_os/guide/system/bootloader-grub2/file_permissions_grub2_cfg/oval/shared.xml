@@ -2,9 +2,7 @@
   <definition class="compliance" id="file_permissions_grub2_cfg" version="1">
     <metadata>
       <title>Verify /boot/grub2/grub.cfg Mode Permissions</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>File permissions for /boot/grub2/grub.cfg should be set to 0600 (or stronger).</description>
     </metadata>
     <criteria operator="OR">

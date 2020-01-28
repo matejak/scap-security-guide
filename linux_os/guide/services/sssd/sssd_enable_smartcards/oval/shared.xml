@@ -2,13 +2,7 @@
   <definition class="compliance" id="sssd_enable_smartcards" version="1">
     <metadata>
       <title>Enable Smartcards in SSSD</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_rhv</platform>
-        <platform>multi_platform_ol</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>SSSD should be configured to authenticate access to the system
     using smart cards.</description>
     </metadata>

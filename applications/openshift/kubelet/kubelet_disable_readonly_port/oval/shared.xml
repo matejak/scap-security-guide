@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_disable_readonly_port" version="1">
     <metadata>
       <title>Disable the Read-Only Port on the kubelet</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The read-only-port should be disabled.</description>
     </metadata>
     <criteria operator="AND">

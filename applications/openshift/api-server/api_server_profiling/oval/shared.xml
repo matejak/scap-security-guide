@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_profiling" version="1">
     <metadata>
       <title>Disable Profiling on the API Server</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Profiling is enabled by default and should be disabled.</description>
     </metadata>
     <criteria operator="AND">

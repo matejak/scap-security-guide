@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_advanced_auditing" version="1">
     <metadata>
       <title>Enable Advanced Auditing for the API Server</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>AdvancedAuditing should not be disabled.</description>
     </metadata>
     <criteria operator="AND">

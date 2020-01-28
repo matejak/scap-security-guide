@@ -2,10 +2,7 @@
   <definition class="compliance" id="sssd_ldap_start_tls" version="1">
     <metadata>
       <title>Configure SSSD LDAP Backend to Use TLS For All Transactions</title>
-      <affected family="unix">
-        <platform>multi_platform_wrlinux</platform>
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>LDAP should be used for authentication and use STARTTLS</description>
     </metadata>
     <criteria operator="AND">

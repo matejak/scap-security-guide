@@ -2,9 +2,7 @@
   <definition class="compliance" id="accounts_password_all_shadowed" version="1">
     <metadata>
       <title>All Password Hashes Shadowed</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>All password hashes should be shadowed.</description>
     </metadata>
     <criteria>

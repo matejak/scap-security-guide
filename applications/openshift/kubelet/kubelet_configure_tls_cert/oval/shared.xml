@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_configure_tls_cert" version="1">
     <metadata>
       <title>Ensure That The kubelet Client Certificate Is Correctly Set</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure that the kubelet TLS client certificate is configured by setting the 
       cert-dir path for the kubelet certificates.</description>
     </metadata>

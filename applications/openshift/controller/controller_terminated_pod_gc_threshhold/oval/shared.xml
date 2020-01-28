@@ -2,9 +2,7 @@
   <definition class="compliance" id="controller_terminated_pod_gc_threshhold" version="1">
     <metadata>
       <title>Enable terminated-pod-gc-threshold for the Controller Manager</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure terminated-pod-gc-threshold is enabled.</description>
     </metadata>
     <criteria operator="AND">

@@ -2,9 +2,7 @@
   <definition class="compliance" id="container_horizon_password_autocomplete" version="1">
     <metadata>
       <title>Is password_autocomplete parameter set to off?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is password_autocomplete parameter set to off?</description>
     </metadata>
     <criteria comment="Is password_autocomplete parameter set to off?" operator="AND">

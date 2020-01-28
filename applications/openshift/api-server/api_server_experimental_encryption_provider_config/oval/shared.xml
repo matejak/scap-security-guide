@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_experimental_encryption_provider_config" version="1">
     <metadata>
       <title>Configure the Encryption Provider</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>An encryption provider configuration file should be configured.</description>
     </metadata>
     <criteria operator="AND">

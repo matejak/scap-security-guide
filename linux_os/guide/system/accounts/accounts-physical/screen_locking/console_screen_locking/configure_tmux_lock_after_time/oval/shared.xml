@@ -2,11 +2,7 @@
   <definition class="compliance" id="configure_tmux_lock_after_time" version="1">
     <metadata>
       <title>Configure tmux to lock session after inactivity</title>
-      <affected family="unix">
-        <platform>multi_platform_fedora</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>Oracle Linux 8</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check if tmux is configured to lock sessions after period of inactivity.</description>
     </metadata>
     <criteria comment="Configure tmux to lock session after inactivity" operator="AND">

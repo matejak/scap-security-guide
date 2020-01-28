@@ -2,9 +2,7 @@
   <definition class="compliance" id="dovecot_enable_ssl" version="1">
     <metadata>
       <title>Enable SSL in Dovecot</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>SSL capabilities should be enabled for the mail server.</description>
     </metadata>
     <criteria comment="Enable SSL in Dovecot" operator="OR">

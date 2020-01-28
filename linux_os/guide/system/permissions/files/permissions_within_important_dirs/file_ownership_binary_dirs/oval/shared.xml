@@ -2,11 +2,7 @@
   <definition class="compliance" id="file_ownership_binary_dirs" version="2">
     <metadata>
       <title>Verify that System Executables Have Root Ownership</title>
-      <affected family="unix">
-        <platform>Red Hat Virtualization 4</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>
         Checks that /bin, /sbin, /usr/bin, /usr/sbin, /usr/local/bin,
         /usr/local/sbin, /usr/libexec, and objects therein, are owned by root.

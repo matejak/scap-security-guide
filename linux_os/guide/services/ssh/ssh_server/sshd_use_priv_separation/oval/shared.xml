@@ -2,9 +2,7 @@
   <definition class="compliance" id="sshd_use_priv_separation" version="1">
     <metadata>
       <title>Rule title of sshd_use_priv_separation</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Look for parameter 'UsePrivilegeSeparation' with value 'sandbox' in '/etc/ssh/sshd_config'</description>
     </metadata>
     <criteria comment="sshd is configured correctly or is not installed"

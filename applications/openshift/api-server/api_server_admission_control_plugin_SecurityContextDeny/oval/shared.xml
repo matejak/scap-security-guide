@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_SecurityContextDeny" version="1">
     <metadata>
       <title>Enable the SecurityContextDeny Admission Control Plugin'</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable SecurityContextDeny to use a Pod Security Policy (PSP).</description>
     </metadata>
     <criteria operator="AND">

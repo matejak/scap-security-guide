@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_enable_iptables_util_chains" version="1">
     <metadata>
       <title>Configure the kubelet for Automatic Firewall Configuration</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable the kubelet's ability to automatically configure the firewall.</description>
     </metadata>
     <criteria operator="AND">

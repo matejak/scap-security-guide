@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_NodeRestriction" version="1">
     <metadata>
       <title>Enable the NodeRestriction Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable NodeRestriction to limit the Node and Pod objects that a kubelet could
       modify.</description>
     </metadata>

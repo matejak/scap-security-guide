@@ -2,9 +2,7 @@
   <definition class="compliance" id="mount_option_var_tmp_bind" version="1">
     <metadata>
       <title>Bind Mount /var/tmp To /tmp</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The /var/tmp directory should be bind mounted to /tmp in
       order to consolidate temporary storage into one location protected by the
       same techniques as /tmp.</description>

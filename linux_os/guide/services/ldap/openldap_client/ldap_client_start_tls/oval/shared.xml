@@ -2,10 +2,7 @@
   <definition class="compliance" id="ldap_client_start_tls" version="1">
     <metadata>
       <title>Configure LDAP to Use TLS for All Transactions</title>
-      <affected family="unix">
-        <platform>Red Hat Virtualization 4</platform>
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Require the use of TLS for ldap clients.</description>
     </metadata>
     {{%- if product == "rhel6" -%}}

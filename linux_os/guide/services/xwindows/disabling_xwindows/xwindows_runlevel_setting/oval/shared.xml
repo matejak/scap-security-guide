@@ -5,10 +5,7 @@
   <definition class="compliance" id="xwindows_runlevel_setting" version="1">
     <metadata>
       <title>Disable X Windows Startup By Setting Default SystemD Target</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-        <platform>multi_platform_fedora</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       {{%- if init_system == "systemd" %}}
       <description>Checks /etc/systemd/system/default.target to ensure that the default runlevel target is set to multi-user.target.</description>
       {{%- else %}}

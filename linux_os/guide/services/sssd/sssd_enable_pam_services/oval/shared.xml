@@ -2,11 +2,7 @@
   <definition class="compliance" id="sssd_enable_pam_services" version="1">
     <metadata>
       <title>Configure PAM in SSSD Services</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>Red Hat Virtualization 4</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>SSSD should be configured to run SSSD PAM services.
       </description>
     </metadata>

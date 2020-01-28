@@ -3,9 +3,7 @@
   version="1">
     <metadata>
       <title>Package McAfeeVSEForLinux Installed</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>McAfee Antivirus software should be installed.</description>
     </metadata>
     <criteria comment="Antivirus is not being used or conditions are met" operator="AND">

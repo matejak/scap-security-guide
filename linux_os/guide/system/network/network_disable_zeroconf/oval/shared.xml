@@ -2,9 +2,7 @@
   <definition class="compliance" id="network_disable_zeroconf" version="1">
     <metadata>
       <title>Disable Zeroconf Networking</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Disable Zeroconf automatic route assignment in the
       169.254.0.0 subnet.</description>
     </metadata>

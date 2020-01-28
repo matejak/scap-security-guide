@@ -2,12 +2,7 @@
   <definition class="compliance" id="dconf_gnome_screensaver_lock_enabled" version="2">
     <metadata>
       <title>Enable GNOME3 Screensaver Lock After Idle Period</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_ol</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Idle activation of the screen lock should be enabled.</description>
     </metadata>
     <criteria operator="OR">

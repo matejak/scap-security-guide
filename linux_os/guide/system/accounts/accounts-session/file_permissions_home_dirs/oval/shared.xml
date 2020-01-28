@@ -2,9 +2,7 @@
   <definition class="compliance" id="file_permissions_home_dirs" version="1">
     <metadata>
       <title>Proper Permissions User Home Directories</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>File permissions should be set correctly for the home directories for all user accounts.</description>
     </metadata>
     <criteria >

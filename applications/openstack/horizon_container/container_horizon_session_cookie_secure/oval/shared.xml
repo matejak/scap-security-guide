@@ -2,9 +2,7 @@
   <definition class="compliance" id="container_horizon_session_cookie_secure" version="1">
     <metadata>
       <title>Is SESSION_COOKIE_SECURE parameter set to True?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is SESSION_COOKIE_SECURE parameter set to True?</description>
     </metadata>
     <criteria comment="Is SESSION_COOKIE_SECURE parameter set to True?" operator="AND">

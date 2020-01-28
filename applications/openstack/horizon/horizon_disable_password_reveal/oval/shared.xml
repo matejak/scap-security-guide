@@ -2,9 +2,7 @@
   <definition class="compliance" id="horizon_disable_password_reveal" version="1">
     <metadata>
       <title>Is disable_password_reveal parameter set to True?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is disable_password_reveal parameter set to True?</description>
     </metadata>
     <criteria comment="Is disable_password_reveal parameter set to True?" operator="AND">

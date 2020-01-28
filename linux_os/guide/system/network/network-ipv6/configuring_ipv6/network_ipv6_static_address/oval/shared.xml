@@ -3,9 +3,7 @@
   id="network_ipv6_static_address" version="1">
     <metadata>
       <title>Manually Assign Global IPv6 Address</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Manually configure addresses for IPv6</description>
     </metadata>
     <criteria operator="OR">

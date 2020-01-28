@@ -2,9 +2,7 @@
   <definition class="compliance" id="container_cinder_osapi_max_request_body_size" version="1">
     <metadata>
       <title>Is osapi_max_request_body_size parameter set to 114688?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is osapi_max_request_body_size parameter set to 114688?</description>
     </metadata>
     <criteria comment="Is osapi_max_request_body_size parameter set to 114688?" operator="AND">

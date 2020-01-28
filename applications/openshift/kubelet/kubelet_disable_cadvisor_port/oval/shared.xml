@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_disable_cadvisor_port" version="1">
     <metadata>
       <title>Disable cAdvisor Port on the kubelet</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Disable the cAdvisor Port as it does not require
       any authentication to connect to the port.</description>
     </metadata>

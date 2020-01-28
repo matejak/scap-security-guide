@@ -2,9 +2,7 @@
   <definition class="compliance" id="controller_bind_address" version="1">
     <metadata>
       <title>Ensure Controller bind-address is set</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure Controller bind-address is set.</description>
     </metadata>
     <criteria operator="AND">

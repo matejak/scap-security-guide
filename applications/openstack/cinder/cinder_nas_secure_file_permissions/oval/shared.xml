@@ -2,9 +2,7 @@
   <definition class="compliance" id="cinder_nas_secure_file_operations" version="1">
     <metadata>
       <title>Is nas_secure_file_operations parameter set to auto?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is nas_secure_file_operations parameter set to auto?</description>
     </metadata>
     <criteria comment="Is nas_secure_file_operations parameter set to auto?" operator="AND">

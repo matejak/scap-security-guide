@@ -2,11 +2,7 @@
   <definition class="compliance" id="ftp_present_banner" version="1">
     <metadata>
       <title>Banner for FTP Users</title>
-      <affected family="unix">
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_rhel</platform>
-        <platform>multi_platform_sle</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>This setting will cause the system greeting banner to be 
       used for FTP connections as well.</description>
     </metadata>

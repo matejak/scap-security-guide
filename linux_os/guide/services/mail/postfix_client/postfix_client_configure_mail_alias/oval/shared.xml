@@ -2,10 +2,7 @@
   <definition class="compliance" id="postfix_client_configure_mail_alias" version="1">
     <metadata>
       <title>Ensure root has a mail alias</title>
-      <affected family="unix">
-          <platform>Red Hat Virtualization 4</platform>
-          <platform>multi_platform_sle</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check if root has the correct mail alias.</description>
     </metadata>
     <criteria comment="Check if root has the correct mail alias.">

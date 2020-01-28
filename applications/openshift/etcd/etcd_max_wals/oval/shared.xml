@@ -2,9 +2,7 @@
   <definition class="compliance" id="etcd_max_wals" version="1">
     <metadata>
       <title>Disable etcd Auto Log Rotation</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure OpenShift is not auto-rotating logs.</description>
     </metadata>
     <criteria>

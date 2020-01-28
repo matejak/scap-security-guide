@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_PodSecurityPolicy" version="1">
     <metadata>
       <title>Enable the PodSecurityPolicy Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable PodSecurityPolicy to reject pods that do not match Pod Security Policies.</description>
     </metadata>
     <criteria operator="AND">

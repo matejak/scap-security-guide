@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_configure_event_creation" version="1">
     <metadata>
       <title>Configure the kubelet for Unlimited Event Generation</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>All events should be captured and not restricted as this helps in
     reconstucting the chain-of-events.</description>
     </metadata>

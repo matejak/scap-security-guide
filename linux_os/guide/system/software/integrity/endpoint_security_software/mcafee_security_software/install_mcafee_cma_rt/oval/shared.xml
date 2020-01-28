@@ -3,9 +3,7 @@
   version="1">
     <metadata>
       <title>Install the McAfee Runtime Libraries and Linux Agent</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Install the McAfee Runtime Libraries (MFErt) and Linux Agent (MFEcma).</description>
     </metadata>
     <criteria operator="AND">

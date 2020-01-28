@@ -2,9 +2,7 @@
   <definition class="compliance" id="ldap_client_tls_cacertpath" version="1">
     <metadata>
       <title>Configure LDAP CA Certificate Path</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Require the use of TLS for ldap clients.</description>
     </metadata>
     {{%- if product == "rhel6" -%}}

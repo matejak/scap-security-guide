@@ -2,9 +2,7 @@
   <definition class="compliance" id="neutron_use_ssl" version="1">
     <metadata>
       <title>Is use_ssl parameter in the [DEFAULT] section set to True?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is use_ssl parameter in the [DEFAULT] section set to True?</description>
     </metadata>
     <criteria comment="Is use_ssl parameter in [DEFAULT] section set to True?" operator="AND">

@@ -2,9 +2,7 @@
   <definition class="compliance" id="keystone_lockout_duration" version="1">
     <metadata>
       <title>Is lockout_duration parameter set to 900?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is lockout_duration parameter set to 900?</description>
     </metadata>
     <criteria comment="Is lockout_duration parameter set to 900?" operator="AND">

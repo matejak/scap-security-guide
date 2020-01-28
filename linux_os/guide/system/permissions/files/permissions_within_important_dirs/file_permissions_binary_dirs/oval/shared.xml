@@ -2,11 +2,7 @@
   <definition class="compliance" id="file_permissions_binary_dirs" version="2">
     <metadata>
       <title>Verify that System Executables Have Restrictive Permissions</title>
-      <affected family="unix">
-        <platform>Red Hat Virtualization 4</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>
         Checks that binary files under /bin, /sbin, /usr/bin, /usr/sbin,
         /usr/local/bin, /usr/local/sbin, and /usr/libexec are not group-writable or world-writable.

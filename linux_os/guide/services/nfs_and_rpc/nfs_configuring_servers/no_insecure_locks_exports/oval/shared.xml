@@ -2,9 +2,7 @@
   <definition class="compliance" id="no_insecure_locks_exports" version="1">
     <metadata>
       <title>Ensure insecure_locks is disabled</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Allowing insecure file locking could allow for sensitive 
       data to be viewed or edited by an unauthorized user.</description>
     </metadata>

@@ -2,9 +2,7 @@
   <definition class="compliance" id="container_keystone_disable_user_account_days_inactive" version="1">
     <metadata>
       <title>Is disable_user_account_days_inactive parameter set to 90?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is disable_user_account_days_inactive parameter set to 90?</description>
     </metadata>
     <criteria comment="Is disable_user_account_days_inactive parameter set to 90?" operator="AND">

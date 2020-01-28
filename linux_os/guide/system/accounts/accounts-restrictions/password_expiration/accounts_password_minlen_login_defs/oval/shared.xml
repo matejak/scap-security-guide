@@ -3,9 +3,7 @@
   <definition class="compliance" id="accounts_password_minlen_login_defs" version="3">
     <metadata>
       <title>Set Password Expiration Parameters</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The password minimum length should be set appropriately.</description>
     </metadata>
     <criteria operator="AND">

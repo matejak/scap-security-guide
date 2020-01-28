@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_enable_server_cert_rotation" version="1">
     <metadata>
       <title>Configure the kubelet To Rotate Server Certificates</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable kubelet server certificate rotation.</description>
     </metadata>
     <criteria operator="AND">

@@ -3,9 +3,7 @@
   id="mount_option_nodev_nonroot_local_partitions" version="1">
     <metadata>
       <title>Add nodev Option to Non-Root Local Partitions</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The nodev mount option prevents files from being interpreted
       as character or block devices. Legitimate character and block devices
       should exist in the /dev directory on the root partition or within chroot

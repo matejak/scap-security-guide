@@ -22,9 +22,7 @@
   <definition class="compliance" id="ensure_fedora_gpgkey_installed" version="2">
     <metadata>
       <title>Fedora Release gpg-pubkey Package Installed</title>
-      <affected family="unix">
-        <platform>multi_platform_fedora</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The Fedora release key package is required to be installed.</description>
     </metadata>
     <criteria comment="Fedora Vendor keys" operator="AND">

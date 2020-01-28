@@ -2,10 +2,7 @@
   <definition class="compliance" id="firewalld_sshd_disabled" version="1">
     <metadata>
       <title>Disallow inbound firewall access to the SSH Server port</title>
-      <affected family="unix">
-        <platform>Red Hat Enterprise Linux 7</platform>
-        <platform>Red Hat Enterprise Linux 8</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>If inbound SSH access is not needed, the firewall should disallow or reject access to
       the SSH port (22).</description>
     </metadata>

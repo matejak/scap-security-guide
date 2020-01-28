@@ -2,9 +2,7 @@
   <definition class="compliance" id="dir_perms_etc_httpd_conf" version="2">
     <metadata>
       <title>Directory /etc/httpd/conf/ Permissions</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Directory permissions for /etc/httpd/conf/ should be set to 0750 (or stronger).</description>
     </metadata>
     <criteria operator="OR">

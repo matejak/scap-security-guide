@@ -2,12 +2,7 @@
   <definition class="compliance" id="audit_rules_file_deletion_events" version="1">
     <metadata>
       <title>Audit File Deletion Events</title>
-      <affected family="unix">
-        <platform>Red Hat Virtualization 4</platform>
-        <platform>multi_platform_fedora</platform>
-        <platform>multi_platform_ol</platform>
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Audit files deletion events.</description>
     </metadata>
     <criteria operator="AND">

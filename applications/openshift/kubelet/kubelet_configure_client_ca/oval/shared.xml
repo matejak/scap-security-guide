@@ -2,9 +2,7 @@
   <definition class="compliance" id="kubelet_configure_client_ca" version="1">
     <metadata>
       <title>Configure the kubelet Client CA Certificate</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Ensure the OpenShift node kubelet is using certificates</description>
     </metadata>
     <criteria operator="AND">

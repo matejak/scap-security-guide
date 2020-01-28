@@ -4,9 +4,7 @@
 
     <metadata>
       <title>Manage Image Provenance using ImagePolicyWebhook Admission Controller</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Manage Image Provenance using ImagePolicyWebhook Admission</description>
     </metadata>
 

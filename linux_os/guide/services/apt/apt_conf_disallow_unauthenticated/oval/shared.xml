@@ -2,10 +2,7 @@
   <definition class="compliance" id="apt_conf_disallow_unauthenticated" version="1">
     <metadata>
       <title>Check that no unauthenticated repository is authorized by configuration</title>
-      <affected family="unix">
-        <platform>multi_platform_debian</platform>
-        <platform>multi_platform_ubuntu</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Accessing a repository should be
       allowed only when the repository is authenticated.</description>
     </metadata>

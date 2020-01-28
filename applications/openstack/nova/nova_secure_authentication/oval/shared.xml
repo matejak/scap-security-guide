@@ -2,9 +2,7 @@
   <definition class="compliance" id="nova_auth_protocol" version="1">
     <metadata>
       <title>Is auth_protocol parameter set to https?</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Is auth_protocol parameter set to https?</description>
     </metadata>
     <criteria comment="Is auth_protocol parameter set to https?" operator="OR">

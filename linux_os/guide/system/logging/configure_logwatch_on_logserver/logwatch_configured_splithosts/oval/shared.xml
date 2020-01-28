@@ -2,9 +2,7 @@
   <definition class="compliance" id="logwatch_configured_splithosts" version="1">
     <metadata>
       <title>Ensure Logwatch SplitHosts Configured</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Check if SplitHosts line in logwatch.conf is set appropriately.</description>
     </metadata>
     <criteria>

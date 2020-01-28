@@ -3,9 +3,7 @@
   version="2">
     <metadata>
       <title>Disable DHCP Client</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>DHCP configuration should be static for all
       interfaces.</description>
     </metadata>

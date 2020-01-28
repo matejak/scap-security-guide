@@ -9,9 +9,7 @@
   <definition class="compliance" id="service_{{{ SERVICENAME }}}_disabled" version="1">
     <metadata>
       <title>Service {{{ SERVICENAME }}} Disabled</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The {{{ SERVICENAME }}} service should be disabled if possible.</description>
     </metadata>
     <criteria comment="package {{{ PACKAGENAME }}} removed or service {{{ SERVICENAME }}} is not configured to start" operator="OR">
@@ -97,9 +95,7 @@
   version="1">
     <metadata>
       <title>Service {{{ SERVICENAME }}} Disabled</title>
-      <affected family="unix">
-        <platform>Ubuntu 14.04</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The {{{ SERVICENAME }}} service should be disabled if possible.</description>
     </metadata>
    <criteria comment="package {{{ PACKAGENAME }}} removed or service {{{ SERVICENAME }}} is not configured to start" operator="OR">
@@ -134,9 +130,7 @@
   version="1">
     <metadata>
       <title>Service {{{ SERVICENAME }}} Disabled</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The {{{ SERVICENAME }}} service should be disabled if possible.</description>
     </metadata>
    <criteria comment="package {{{ PACKAGENAME }}} removed or service {{{ SERVICENAME }}} is not configured to start" operator="OR">
@@ -234,9 +228,7 @@
   <definition class="compliance" id="service_{{{ SERVICENAME }}}_disabled" version="2">
     <metadata>
       <title>Service {{{ SERVICENAME }}} Disabled</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>The {{{ SERVICENAME }}} service should be disabled if possible.</description>
     </metadata>
     <criteria comment="package {{{ PACKAGENAME }}} removed or service and socket {{{ SERVICENAME }}} are not configured to start" operator="OR">

@@ -2,9 +2,7 @@
   <definition class="compliance" id="postfix_server_banner" version="1">
     <metadata>
       <title>Configure Postfix Against Unnecessary Release of Information</title>
-      <affected family="unix">
-        <platform>multi_platform_rhel</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Protect against unnecessary release of information.</description>
     </metadata>
     <criteria operator="AND">

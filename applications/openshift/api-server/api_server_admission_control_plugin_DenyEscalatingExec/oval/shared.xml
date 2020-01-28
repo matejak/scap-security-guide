@@ -2,9 +2,7 @@
   <definition class="compliance" id="api_server_admission_control_plugin_DenyEscalatingExec" version="1">
     <metadata>
       <title>Enable the DenyEscalatingExec Admission Control Plugin</title>
-      <affected family="unix">
-        <platform>multi_platform_ocp</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Enable DenyEscalatingExec to prevent
       privileged pods to execute exec and attach commands.</description>
     </metadata>

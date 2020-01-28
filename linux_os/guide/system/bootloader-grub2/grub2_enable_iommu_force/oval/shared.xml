@@ -2,9 +2,7 @@
   <definition class="compliance" id="grub2_enable_iommu_force" version="1">
     <metadata>
       <title>Force IOMMU usage in GRUB2</title>
-      <affected family="unix">
-        <platform>multi_platform_all</platform>
-      </affected>
+      {{{- oval_affected(products) }}}
       <description>Look for argument iommu=force in the kernel line in /etc/default/grub.</description>
     </metadata>
     <criteria operator="AND">
