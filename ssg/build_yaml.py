@@ -425,6 +425,7 @@ class ProfileWithSeparatePolicies(ResolvableProfile):
         return controls
 
     def resolve_controls(self, controls_manager):
+        # TODO: Resolve in a way that notapplicable rules are excluded?
         for policy_id, controls_ids in self.policies.items():
             controls = []
 
@@ -1314,6 +1315,7 @@ class DirectoryLoader(object):
                              "the same directory '%s'" % (guide_directory))
 
         # we treat benchmark as a special form of group in the following code
+        # TODO: Load profiles after all rules are loaded
         if self.benchmark_file:
             group = Benchmark.from_yaml(
                 self.benchmark_file, 'product-name', self.env_yaml

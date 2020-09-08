@@ -22,10 +22,15 @@ controls:
       Use of obsolete or insecure services is not recommended.
       The minimal install is a good starting point, but this doesn't provide any assurante over any packages installed later.
     rules:
+    - package_telnetd_removed
+    - package_inetutils-telnetd_removed
+    - package_telnetd-ssl_removed
+    - package_nis_removed
     - package_dhcp_removed
     - package_rsh_removed
     - package_rsh-server_removed
     - package_sendmail_removed
+    - package_ntpdate_removed
     - package_talk_removed
     - package_talk-server_removed
     - package_telnet_removed
@@ -67,8 +72,10 @@ controls:
     title: In-depth defense principle
     rules:
     - sudo_remove_no_authenticate
+    # Note: Those were committed as "average" in https://github.com/ComplianceAsCode/content/pull/1280
     - package_rsyslog_installed
     - service_rsyslog_enabled
+    - package_ntp_installed
 
   - id: R8
     level: minimal
@@ -113,6 +120,7 @@ controls:
 
     # /var/log nosuid, nodev, noexec Contains system logs
     - partition_for_var_log
+    - partition_for_var_log_audit
 
     # /var/tmp nosuid, nodev, noexec Temporary files kept after extinction
     - partition_for_var_tmp
@@ -335,6 +343,7 @@ controls:
     - file_permissions_etc_gshadow
     - file_permissions_etc_passwd
     - file_permissions_etc_group
+    - file_permissions_systemmap
 
   - id: R37
     level: minimal
