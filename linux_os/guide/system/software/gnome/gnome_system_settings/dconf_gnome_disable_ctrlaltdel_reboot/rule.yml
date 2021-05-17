@@ -1,6 +1,6 @@
 documentation_complete: true
 
-prodtype: fedora,ol7,ol8,rhel7,rhel8
+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9
 
 title: 'Disable Ctrl-Alt-Del Reboot Key Sequence in GNOME3'
 
@@ -31,6 +31,7 @@ severity: high
 identifiers:
     cce@rhel7: CCE-80124-1
     cce@rhel8: CCE-84028-0
+    cce@rhel9: CCE-88653-1
 
 references:
     stigid@ol7: OL07-00-020231
