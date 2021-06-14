@@ -4,10 +4,23 @@ import sys
 import os
 import jinja2
 import argparse
+import re
+import random
 
-from ssg import yaml, checks
+from ssg import yaml, checks, products
 from ssg.shims import input_func
 import ssg
+
+
+_COMMANDS = dict()
+
+
+def command(name, description):
+    def wrapper(wrapped):
+        _COMMANDS[name] = wrapped
+        wrapped.description = description
+        return wrapped
+    return wrapper
 
 
 def has_empty_identifier(yaml_file, product_yaml=None):
@@ -20,6 +33,21 @@ def has_empty_identifier(yaml_file, product_yaml=None):
             if str(value).strip() == "":
                 return True
     return False
+
+
+def has_no_cce(yaml_file, product_yaml=None):
+    rule = yaml.open_and_macro_expand(yaml_file, product_yaml)
+    product = product_yaml["product"]
+    if "prodtype" in rule and product not in rule["prodtype"]:
+        return False
+    if 'identifiers' in rule and rule['identifiers'] is None:
+        return True
+
+    if 'identifiers' in rule and rule['identifiers'] is not None:
+        for ident in rule['identifiers']:
+            if ident == "cce@" + product:
+                return False
+    return True
 
 
 def has_empty_references(yaml_file, product_yaml=None):
@@ -74,7 +102,7 @@ def has_int_reference(yaml_file, product_yaml=None):
     return False
 
 
-def find_rules(directory, func):
+def find_rules(directory, func, first_product_yaml=None):
     # Iterates over passed directory to correctly parse rules (which are
     # YAML files with internal macros). The most recently seen product.yml
     # takes precedence over previous product.yml, e.g.:
@@ -93,7 +121,7 @@ def find_rules(directory, func):
     results = []
     product_yamls = {}
     product_yaml_paths = {}
-    product_yaml = None
+    product_yaml = first_product_yaml
     product_yaml_path = None
     for root, dirs, files in os.walk(directory):
         dirs.sort()
@@ -129,6 +157,8 @@ def find_rules(directory, func):
             except jinja2.exceptions.UndefinedError:
                 print("Failed to parse file %s (with product.yml: %s). Skipping"
                       % (path, product_yaml_path))
+                pass
+            except ssg.yaml.DocumentationNotComplete:
                 pass
 
     return results
@@ -245,7 +275,10 @@ def rewrite_value_remove_prefix(line):
 
 
 class CCEFile:
-    def __init__(self, project_root):
+    def __init__(self, project_root=None):
+        if not project_root:
+            project_root = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "..")
         self.project_root = project_root
 
     @property
@@ -289,8 +322,8 @@ def add_to_the_section(file_contents, yaml_contents, section, new_keys):
 
     sec_ranges = find_section_lines(file_contents, section)
     if len(sec_ranges) != 1:
-        raise RuntimeError("Refusing to fix file: %s -- could not find one section: %d"
-                           % (path, sec_ranges))
+        raise RuntimeError("could not find one section: %s"
+                           % section)
 
     begin, end = sec_ranges[0]
     r_lines = set()
@@ -303,6 +336,26 @@ def add_to_the_section(file_contents, yaml_contents, section, new_keys):
         to_insert.append(leading_whitespace + key + ": " + value)
 
     new_contents = file_contents[:end] + to_insert + file_contents[end:]
+    return new_contents
+
+
+def sort_section(file_contents, yaml_contents, section):
+    sec_ranges = find_section_lines(file_contents, section)
+    if len(sec_ranges) != 1:
+        raise RuntimeError("could not find one section: %s"
+                           % section)
+
+    begin, end = sec_ranges[0]
+    section_content_start = begin + 1
+
+    if end - section_content_start < 1:
+        return file_contents
+
+    contents_to_sort = file_contents[section_content_start:end]
+    new_contents = (
+        file_contents[:section_content_start]
+        + sorted(contents_to_sort)
+        + file_contents[end:])
     return new_contents
 
 
@@ -420,6 +473,9 @@ def has_product_cce(yaml_contents, product):
 def add_product_cce(file_contents, yaml_contents, product, cce):
     section = 'identifiers'
 
+    if section not in yaml_contents:
+        return file_contents
+
     return add_to_the_section(
         file_contents, yaml_contents, section, {f"cce@{product}": f"{cce}"})
 
@@ -447,34 +503,98 @@ def fix_int_reference(file_contents, yaml_contents):
     return rewrite_section_value_int_str(file_contents, yaml_contents, section, int_identifiers)
 
 
-def fix_file(path, product_yaml, func):
-    file_contents = open(path, 'r').read().split("\n")
+def _fixed_file_contents(path, file_contents, product_yaml, func):
     if file_contents[-1] == '':
         file_contents = file_contents[:-1]
 
-    yaml_contents = yaml.open_and_macro_expand(path, product_yaml)
+    subst_dict = product_yaml
+    # subst_dict = products.load_product_yaml(product_yaml)
+    yaml_contents = yaml.open_and_macro_expand(path, subst_dict)
+
+    try:
+        new_file_contents = func(file_contents, yaml_contents)
+    except Exception as exc:
+        msg = "Refusing to fix file: {path}: {error}".format(path=path, error=str(exc))
+        raise RuntimeError(msg)
+
+    return new_file_contents
+
+
+def fix_file(path, product_yaml, func):
+    file_contents = open(path, 'r').read().split("\n")
+
+    new_file_contents = _fixed_file_contents(path, file_contents, product_yaml, func)
+    if file_contents == new_file_contents:
+        return False
+
+    with open(path, 'w') as f:
+        for line in new_file_contents:
+            print(line, file=f)
+    print(new_file_contents)
+    return True
+
+
+def fix_file_prompt(path, product_yaml, func):
+    file_contents = open(path, 'r').read().split("\n")
+
+    new_file_contents = _fixed_file_contents(path, file_contents, product_yaml, func)
+    changes = file_contents != new_file_contents
+
+    if not changes:
+        return changes
 
     print("====BEGIN BEFORE====")
     print_file(file_contents)
     print("====END BEFORE====")
 
-    file_contents = func(file_contents, yaml_contents)
-
     print("====BEGIN AFTER====")
-    print_file(file_contents)
+    print_file(new_file_contents)
     print("====END AFTER====")
     response = input_func("Confirm writing output to %s: (y/n): " % path)
     if response.strip() == 'y':
-        f = open(path, 'w')
-        for line in file_contents:
-            f.write(line)
-            f.write("\n")
-        f.flush()
-        f.close()
+        changes = True
+        with open(path, 'w') as f:
+            for line in new_file_contents:
+                print(line, file=f)
+    else:
+        changes = False
+    return changes
 
 
-def fix_empty_identifiers(directory):
-    results = find_rules(directory, has_empty_identifier)
+def add_cce(args, product_yaml):
+    directory = os.path.join(args.root, args.subdirectory)
+    return _add_cce(directory, args.rule, product_yaml)
+
+
+def _add_cce(directory, rules, product_yaml):
+    product = product_yaml["product"]
+    cces = RedhatCCEFile()
+
+    def is_relevant_rule(fname, _=None):
+        for r in rules:
+            if fname.endswith(f"/{r}/rule.yml"):
+                return True
+        return False
+
+    results = find_rules(directory, is_relevant_rule, product_yaml)
+    print("Number of rules without CCEs: %d" % len(results))
+
+    for result in results:
+        rule_path = result[0]
+
+        cce = cces.random_cce()
+
+        def fix_callback(file_contents, yaml_contents):
+            return add_product_cce(file_contents, yaml_contents, product_yaml["product"], cce)
+        changes = fix_file(rule_path, product_yaml, fix_callback)
+
+        if changes:
+            cces.remove_cce_from_file(cce)
+
+
+@command("empty_identifiers", "check and fix rules with empty identifiers")
+def fix_empty_identifiers(args):
+    results = find_rules(args.directory, has_empty_identifier)
     print("Number of rules with empty identifiers: %d" % len(results))
 
     for result in results:
@@ -485,11 +605,12 @@ def fix_empty_identifiers(directory):
         if product_yaml_path is not None:
             product_yaml = yaml.open_raw(product_yaml_path)
 
-        fix_file(rule_path, product_yaml, fix_empty_identifier)
+        fix_file_prompt(rule_path, product_yaml, fix_empty_identifier)
 
 
-def fix_empty_references(directory):
-    results = find_rules(directory, has_empty_references)
+@command("empty_references", "check and fix rules with empty references")
+def fix_empty_references(args):
+    results = find_rules(args.directory, has_empty_references)
     print("Number of rules with empty references: %d" % len(results))
 
     for result in results:
@@ -500,11 +621,12 @@ def fix_empty_references(directory):
         if product_yaml_path is not None:
             product_yaml = yaml.open_raw(product_yaml_path)
 
-        fix_file(rule_path, product_yaml, fix_empty_reference)
+        fix_file_prompt(rule_path, product_yaml, fix_empty_reference)
 
 
-def find_prefix_cce(directory):
-    results = find_rules(directory, has_prefix_cce)
+@command("prefixed_identifiers", "check and fix rules with prefixed (CCE-) identifiers")
+def find_prefix_cce(args):
+    results = find_rules(args.directory, has_prefix_cce)
     print("Number of rules with prefixed CCEs: %d" % len(results))
 
     for result in results:
@@ -515,11 +637,12 @@ def find_prefix_cce(directory):
         if product_yaml_path is not None:
             product_yaml = yaml.open_raw(product_yaml_path)
 
-        fix_file(rule_path, product_yaml, fix_prefix_cce)
+        fix_file_prompt(rule_path, product_yaml, fix_prefix_cce)
 
 
-def find_invalid_cce(directory):
-    results = find_rules(directory, has_invalid_cce)
+@command("invalid_identifiers", "check and fix rules with invalid identifiers")
+def find_invalid_cce(args):
+    results = find_rules(args.directory, has_invalid_cce)
     print("Number of rules with invalid CCEs: %d" % len(results))
 
     for result in results:
@@ -530,11 +653,12 @@ def find_invalid_cce(directory):
         if product_yaml_path is not None:
             product_yaml = yaml.open_raw(product_yaml_path)
 
-        fix_file(rule_path, product_yaml, fix_invalid_cce)
+        fix_file_prompt(rule_path, product_yaml, fix_invalid_cce)
 
 
-def find_int_identifiers(directory):
-    results = find_rules(directory, has_int_identifier)
+@command("int_identifiers", "check and fix rules with pseudo-integer identifiers")
+def find_int_identifiers(args):
+    results = find_rules(args.directory, has_int_identifier)
     print("Number of rules with integer identifiers: %d" % len(results))
 
     for result in results:
@@ -545,11 +669,12 @@ def find_int_identifiers(directory):
         if product_yaml_path is not None:
             product_yaml = yaml.open_raw(product_yaml_path)
 
-        fix_file(rule_path, product_yaml, fix_int_identifier)
+        fix_file_prompt(rule_path, product_yaml, fix_int_identifier)
 
 
-def find_int_references(directory):
-    results = find_rules(directory, has_int_reference)
+@command("int_references", "check and fix rules with pseudo-integer references")
+def find_int_references(args, product_yaml):
+    results = find_rules(args.directory, has_int_reference)
     print("Number of rules with integer references: %d" % len(results))
 
     for result in results:
@@ -560,46 +685,41 @@ def find_int_references(directory):
         if product_yaml_path is not None:
             product_yaml = yaml.open_raw(product_yaml_path)
 
-        fix_file(rule_path, product_yaml, fix_int_reference)
+        fix_file_prompt(rule_path, product_yaml, fix_int_reference)
+
+
+def create_parser_from_functions(subparsers):
+    for name, function in _COMMANDS.items():
+        subparser = subparsers.add_parser(name, description=function.description)
+        subparser.add_argument("directory")
+        subparser.set_defaults(func=function)
+
 
 
 def parse_args():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
-                                     description="Utility for fixing mistakes in .rule files",
-                                     epilog="""
-Commands:
-\tempty_identifiers - check and fix rules with empty identifiers
-\tprefixed_identifiers - check and fix rules with prefixed (CCE-) identifiers
-\tinvalid_identifiers - check and fix rules with invalid identifiers
-\tint_identifiers - check and fix rules with pseudo-integer identifiers
-\tempty_references - check and fix rules with empty references
-\tint_references - check and fix rules with pseudo-integer references
-                                     """)
-    parser.add_argument("command", help="Which fix to perform.",
-                        choices=['empty_identifiers', 'prefixed_identifiers',
-                                 'invalid_identifiers', 'int_identifiers',
-                                 'empty_references', 'int_references'])
-    parser.add_argument("ssg_root", help="Path to root of ssg git directory")
+                                     description="Utility for fixing mistakes in rule files")
+    parser.add_argument(
+        "--root", default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        help="Path to root of the project directory")
+    parser.add_argument("--product", "-p", help="Path to the main product.yml")
+    subparsers = parser.add_subparsers(title="command", help="What to perform.")
+    create_parser_from_functions(subparsers)
     return parser.parse_args()
 
 
 def __main__():
     args = parse_args()
+    project_root = args.root
+    if not project_root:
+        project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir)
 
-    if args.command == 'empty_identifiers':
-        fix_empty_identifiers(args.ssg_root)
-    elif args.command == 'prefixed_identifiers':
-        find_prefix_cce(args.ssg_root)
-    elif args.command == 'invalid_identifiers':
-        find_invalid_cce(args.ssg_root)
-    elif args.command == 'int_identifiers':
-        find_int_identifiers(args.ssg_root)
-    elif args.command == 'empty_references':
-        fix_empty_references(args.ssg_root)
-    elif args.command == 'int_references':
-        find_int_references(args.ssg_root)
-    else:
-        sys.exit(1)
+    subst_dict = dict()
+    if args.product:
+        subst_dict = products.load_product_yaml(args.product)
+
+    args.func(args, subst_dict)
+
 
 if __name__ == "__main__":
     __main__()
