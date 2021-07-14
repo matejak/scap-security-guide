@@ -1,6 +1,6 @@
 documentation_complete: true
 
-prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4
+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4
 
 title: 'Configure opensc Smart Card Drivers'
 
@@ -9,9 +9,8 @@ description: |-
     setting the smart card drivers in use by your organization helps to prevent
     users from using unauthorized smart cards. The default smart card driver for this
     profile is <tt>{{{ xccdf_value("var_smartcard_drivers") }}}</tt>.
-    To configure the OpenSC driver, edit the <tt>/etc/opensc-<i>ARCH</i>.conf</tt> (where
-    <i>ARCH</i> is the architecture of your operating system) file. Look for a
-    line similar to:
+    To configure the OpenSC driver, edit the <tt>/etc/opensc.conf</tt>.
+    Look for a line similar to:
     <pre># card_drivers = old, internal;</pre>
     and change it to:
     <pre>card_drivers = {{{ xccdf_value("var_smartcard_drivers") }}};</pre>
@@ -28,6 +27,7 @@ severity: medium
 identifiers:
     cce@rhel7: CCE-80565-5
     cce@rhel8: CCE-80766-9
+    cce@rhel9: CCE-89122-6
 
 references:
     disa: CCI-000765,CCI-000766,CCI-000767,CCI-000768,CCI-000771,CCI-000772,CCI-000884
@@ -47,8 +47,7 @@ ocil_clause: 'the smart card driver is not configured correctly'
 
 ocil: |-
     To verify that <tt>{{{ xccdf_value("var_smartcard_drivers") }}}</tt> is configured
-    as the smart card driver, run the following command changing <i>ARCH</i> for
-    the architecture of your operating system:
-    <pre>$ grep card_drivers /etc/opensc-<i>ARCH</i></pre>
+    as the smart card driver, run the following command:
+    <pre>$ grep card_drivers /etc/opensc.conf</pre>
     The output should return something similar to:
     <pre>card_drivers = {{{ xccdf_value("var_smartcard_drivers") }}};</pre>
