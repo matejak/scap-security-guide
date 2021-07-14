@@ -13,6 +13,7 @@ import ssg
 
 
 _COMMANDS = dict()
+CCE_POOLS = dict()
 
 
 def command(name, description):
@@ -317,6 +318,9 @@ class RedhatCCEFile(CCEFile):
         return os.path.join(self.project_root, "shared", "references", "cce-redhat-avail.txt")
 
 
+CCE_POOLS["redhat"] = RedhatCCEFile
+
+
 def add_to_the_section(file_contents, yaml_contents, section, new_keys):
     to_insert = []
 
@@ -326,11 +330,9 @@ def add_to_the_section(file_contents, yaml_contents, section, new_keys):
                            % section)
 
     begin, end = sec_ranges[0]
-    r_lines = set()
 
     assert end > begin, "We need at least one identifier there already"
     template_line = str(file_contents[end - 1])
-    print(f"{template_line}")
     leading_whitespace = re.match(r"^\s*", template_line).group()
     for key, value in new_keys.items():
         to_insert.append(leading_whitespace + key + ": " + value)
@@ -476,9 +478,10 @@ def add_product_cce(file_contents, yaml_contents, product, cce):
     if section not in yaml_contents:
         return file_contents
 
-    return add_to_the_section(
+    new_contents = add_to_the_section(
         file_contents, yaml_contents, section, {f"cce@{product}": f"{cce}"})
-
+    new_contents = sort_section(new_contents, yaml_contents, section)
+    return new_contents
 
 
 def fix_int_identifier(file_contents, yaml_contents):
@@ -530,7 +533,6 @@ def fix_file(path, product_yaml, func):
     with open(path, 'w') as f:
         for line in new_file_contents:
             print(line, file=f)
-    print(new_file_contents)
     return True
 
 
@@ -563,33 +565,35 @@ def fix_file_prompt(path, product_yaml, func):
 
 def add_cce(args, product_yaml):
     directory = os.path.join(args.root, args.subdirectory)
-    return _add_cce(directory, args.rule, product_yaml)
+    cce_pool = CCE_POOLS[args.cce_pool]
+    return _add_cce(directory, cce_pool, args.rule, product_yaml)
 
 
-def _add_cce(directory, rules, product_yaml):
+def _add_cce(directory, cce_pool, rules, product_yaml):
     product = product_yaml["product"]
-    cces = RedhatCCEFile()
+    cce_pool = RedhatCCEFile()
 
     def is_relevant_rule(fname, _=None):
         for r in rules:
-            if fname.endswith(f"/{r}/rule.yml"):
+            if (
+                    fname.endswith(f"/{r}/rule.yml")
+                    and has_no_cce(fname, product_yaml)):
                 return True
         return False
 
     results = find_rules(directory, is_relevant_rule, product_yaml)
-    print("Number of rules without CCEs: %d" % len(results))
 
     for result in results:
         rule_path = result[0]
 
-        cce = cces.random_cce()
+        cce = cce_pool.random_cce()
 
         def fix_callback(file_contents, yaml_contents):
             return add_product_cce(file_contents, yaml_contents, product_yaml["product"], cce)
         changes = fix_file(rule_path, product_yaml, fix_callback)
 
         if changes:
-            cces.remove_cce_from_file(cce)
+            cce_pool.remove_cce_from_file(cce)
 
 
 @command("empty_identifiers", "check and fix rules with empty identifiers")
@@ -695,6 +699,12 @@ def create_parser_from_functions(subparsers):
         subparser.set_defaults(func=function)
 
 
+def create_other_parsers(subparsers):
+    subparser = subparsers.add_parser("add-cce", description="Add CCE to rule files")
+    subparser.add_argument("rule", nargs="+")
+    subparser.add_argument("--subdirectory", default="linux_os")
+    subparser.add_argument("--cce-pool", "-p", default="redhat", choices=list(CCE_POOLS.keys()))
+    subparser.set_defaults(func=add_cce)
 
 def parse_args():
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -705,6 +715,7 @@ def parse_args():
     parser.add_argument("--product", "-p", help="Path to the main product.yml")
     subparsers = parser.add_subparsers(title="command", help="What to perform.")
     create_parser_from_functions(subparsers)
+    create_other_parsers(subparsers)
     return parser.parse_args()
 
 
